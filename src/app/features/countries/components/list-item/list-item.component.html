@@ -1,0 +1,24 @@
+<div
+  class="
+    p-4
+    border border-black
+    rounded-sm
+    m-2
+    w-1/2
+    mx-auto
+    cursor-pointer
+    hover:bg-green-500 hover:bg-opacity-10 hover:border-green-500
+  "
+>
+  <div class="flex flex-row justify-between">
+    <div class="flex flex-row justify-start">
+      <img [src]="country.flag" class="w-10 h-5" />
+      <span class="font-semibold ml-2">{{ country?.name }}</span>
+    </div>
+
+    <span>{{ country?.nativeName }}</span>
+  </div>
+  <div class="flex flex-row text-sm">
+    {{ country?.capital }}
+  </div>
+</div>

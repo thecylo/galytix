@@ -1,0 +1,43 @@
+<div class="w-full h-full mb-5" *ngIf="countriesData; else loading">
+  <div class="flex flex-row w-1/2 mx-auto mt-5 justify-between">
+    <div>
+      <span class="mr-3">Sorty by name</span>
+      <span class="text-lg mx-2 cursor-pointer" (click)="sort(true)"> ↑</span>
+      <span class="text-lg cursor-pointer" (click)="sort(false)"> ↓</span>
+    </div>
+    <div>
+      {{ checkBoxTxt }}
+      <input
+        type="checkbox"
+        class="cursor-pointer my-auto"
+        [checked]="checkboxValue"
+        (click)="typeChange($event)"
+      />
+    </div>
+  </div>
+  <ng-container *ngIf="checkboxValue; else list">
+    <div class="flex flex-row w-1/2 mx-auto flex-wrap justify-between">
+      <div *ngFor="let country of listData" class="my-5">
+        <app-box-item [country]="country"></app-box-item>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #list>
+    <div *ngFor="let country of listData">
+      <app-list-item
+        [country]="country"
+        (click)="test($event)"
+        [routerLink]="['asdf']"
+      ></app-list-item>
+    </div>
+  </ng-template>
+
+  <app-pager
+    [pageSize]="5"
+    [inputData]="countriesData"
+    (pagedData)="newData($event)"
+  ></app-pager>
+</div>
+<ng-template #loading>
+  <div class="w-1/2 mx-auto">Loading.....</div>
+</ng-template>

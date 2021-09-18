@@ -1,0 +1,53 @@
+<div class="w-1/2 mx-auto mb-10">
+  <div class="flex flex-row justify-between">
+    <div class="flex flex-row justify-start">
+      <span
+        class="my-auto cursor-pointer"
+        (click)="setPage(pager.currentPage - 1, pageSize)"
+        *ngIf="pager.currentPage > 1"
+      >
+        <<
+      </span>
+      <div class="text-xs mx-2">
+        <input
+          class="border border-black rounded-md h-10 text-center w-20"
+          type="number"
+          min="1"
+          [value]="pager.currentPage"
+          (change)="changePage($event)"
+        />
+      </div>
+      <span
+        class="my-auto cursor-pointer"
+        (click)="setPage(pager.currentPage + 1, pageSize)"
+        *ngIf="pager.currentPage < pagerPages.length"
+      >
+        >>
+      </span>
+      <span class="mx-2 my-auto">
+        Page {{ pager.currentPage }} of {{ pagerPages.length }}</span
+      >
+    </div>
+    <div class="flex flex-row">
+      <span class="mx-2 my-auto">Items per page</span>
+      <select
+        id="page-selector"
+        class="
+          cursor-pointer
+          text-xs
+          border border-black
+          rounded-md
+          h-10
+          text-center
+          w-20
+        "
+        (change)="changePageSize(pageSizeSelector.value)"
+        #pageSizeSelector
+      >
+        <option [value]="option" *ngFor="let option of pageSizeOptions">
+          {{ option }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
