@@ -2,9 +2,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   Input,
-  OnInit,
+  Output,
+  ViewChild,
 } from '@angular/core';
+import { DialogComponent } from '@sharedComponents';
 import { Country } from '../../model/countries';
 
 @Component({
@@ -12,35 +15,36 @@ import { Country } from '../../model/countries';
   selector: 'app-list',
   templateUrl: './list.component.html',
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
+  @ViewChild('multipleDelete') weatherDialog!: DialogComponent;
+
   listData: Country[] = new Array<Country>();
 
   countriesData: Country[] = new Array<Country>();
 
-  checkBoxTxt: 'boxes' | 'list' = 'boxes';
-
   checkboxValue: boolean = false;
+
+  weatherData!: any;
 
   @Input() set countries(data: Country[]) {
     this.countriesData = [...data];
   }
-  constructor(private ref: ChangeDetectorRef) {}
 
-  ngOnInit(): void {}
-
-  test(evnt: MouseEvent) {
-    console.warn('test');
+  @Input() set weather(weather: any) {
+    this.weatherData = { ...weather };
   }
 
+  @Output() selectedCountry: EventEmitter<string> = new EventEmitter<string>();
+
+  constructor(private ref: ChangeDetectorRef) {}
+
   newData(data: any[]): void {
-    console.warn(data);
     this.listData = [...data];
     this.ref.detectChanges();
   }
 
   typeChange(evnt: any): void {
     const checked = evnt.target.checked;
-    checked ? (this.checkBoxTxt = 'boxes') : (this.checkBoxTxt = 'list');
     this.checkboxValue = checked;
   }
 

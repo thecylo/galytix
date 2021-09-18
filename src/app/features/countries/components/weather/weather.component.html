@@ -1,0 +1,23 @@
+<div class="p-8 flex flex-col justify-between">
+  <div class="flex flex-row justify-end">
+    <span class="cursor-pointer" (click)="close.emit(true)"> X</span>
+  </div>
+  <ng-container *ngIf="weather; else loading">
+    <span
+      >Weather for <span class="font-semibold">{{ weather?.name }}</span></span
+    >
+    <span>
+      Current weather is :
+      {{ weather?.weather?.length && weather?.weather[0]?.description }}
+    </span>
+    <span> Current temparate is: {{ weather?.main?.temp }}°C </span>
+    <span> Maximum temperature: {{ weather?.main?.temp_max }}°C </span>
+    <span>
+      Minimum temperature:
+      {{ weather?.main?.temp_min }}°C
+    </span>
+    <span> Speed of wind is: {{ weather?.wind?.speed }}m/s </span>
+    <span> Humidity is: {{ weather?.main?.humidity }}% </span>
+  </ng-container>
+  <ng-template #loading>loading....</ng-template>
+</div>

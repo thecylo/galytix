@@ -1,1 +1,5 @@
-<app-list [countries]="countries"></app-list>
+<app-list
+  [weather]="weather"
+  [countries]="countries"
+  (selectedCountry)="getDataCountry($event)"
+></app-list>

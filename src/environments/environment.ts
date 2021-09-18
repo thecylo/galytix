@@ -5,6 +5,8 @@
 export const environment = {
   production: false,
   countriesUrl: 'https://restcountries.eu/rest/v2/all',
+  weatherUrl: 'https://api.openweathermap.org/data/2.5/weather?q=',
+  APIKey: '794ee95e63c5a32aaf88cd813fa2e425',
 };
 
 /*

@@ -6,7 +6,7 @@
       <span class="text-lg cursor-pointer" (click)="sort(false)"> ↓</span>
     </div>
     <div>
-      {{ checkBoxTxt }}
+      boxes
       <input
         type="checkbox"
         class="cursor-pointer my-auto"
@@ -18,16 +18,19 @@
   <ng-container *ngIf="checkboxValue; else list">
     <div class="flex flex-row w-1/2 mx-auto flex-wrap justify-between">
       <div *ngFor="let country of listData" class="my-5">
-        <app-box-item [country]="country"></app-box-item>
+        <app-box-item
+          [country]="country"
+          (click)="selectedCountry.emit(country.capital); weatherDialog.open()"
+        ></app-box-item>
       </div>
     </div>
   </ng-container>
   <ng-template #list>
     <div *ngFor="let country of listData">
       <app-list-item
+        class="w-1/2"
         [country]="country"
-        (click)="test($event)"
-        [routerLink]="['asdf']"
+        (click)="selectedCountry.emit(country.capital); weatherDialog.open()"
       ></app-list-item>
     </div>
   </ng-template>
@@ -41,3 +44,12 @@
 <ng-template #loading>
   <div class="w-1/2 mx-auto">Loading.....</div>
 </ng-template>
+
+<app-dialog #multipleDelete [clickOutside]="false">
+  <ng-template #dialogBody>
+    <app-weather
+      [data]="weatherData"
+      (close)="weatherDialog.close()"
+    ></app-weather>
+  </ng-template>
+</app-dialog>

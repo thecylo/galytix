@@ -9,6 +9,7 @@ import { Country } from '../model/countries';
 })
 export class CountriesComponent implements OnInit {
   countries: Country[] = new Array<Country>();
+  weather!: any;
   constructor(private service: CountriesService) {}
 
   ngOnInit(): void {
@@ -26,7 +27,17 @@ export class CountriesComponent implements OnInit {
             ]);
         },
         error: (err) => console.error(err),
-        complete: () => console.warn(this.countries),
       });
+  }
+  getDataCountry(country: string): void {
+    country &&
+      this.service
+        .getWeatherByCity(country)
+        .pipe(first())
+        .subscribe({
+          next: (resp) => {
+            this.weather = { ...resp };
+          },
+        });
   }
 }

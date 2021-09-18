@@ -19,7 +19,8 @@
     "lib": ["es2018", "dom"],
     "paths": {
       "@sharedServices": ["src/app/shared/services"],
-      "@sharedComponents": ["src/app/shared/components"]
+      "@sharedComponents": ["src/app/shared/components"],
+      "@sharedDirectives": ["src/app/shared/directives"]
     }
   },
   "angularCompilerOptions": {

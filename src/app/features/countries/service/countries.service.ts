@@ -15,4 +15,10 @@ export class CountriesService {
   getCountries(): Observable<Country[]> {
     return this.http.get<Country[]>(environment.countriesUrl);
   }
+
+  getWeatherByCity(city: string): Observable<any> {
+    return this.http.get<any>(
+      `${environment.weatherUrl}${city}&APPID=${environment.APIKey}&units=metric`
+    );
+  }
 }
